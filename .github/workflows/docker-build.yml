@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   CLUSTER_NAME: ecommrce-cluster
-  ZONE_NAME: asia-south1
+  ZONE_NAME: asia-southeast1
 
 jobs:
 
