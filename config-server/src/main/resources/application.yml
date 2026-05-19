@@ -10,8 +10,8 @@ spring:
       server:
         git:
           uri: https://github.com/abhaypandeycdac/ecommrce-config-repo
-          username: abhaypandeycdac
-          password: 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
+          username: ${GIT_USERNAME}
+          password: ${GIT_PASSWORD}
           default-label: main
           clone-on-start: true
 
