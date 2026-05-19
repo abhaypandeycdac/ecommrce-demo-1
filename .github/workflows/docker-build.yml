@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   CLUSTER_NAME: ecommrce-demo
-  ZONE_NAME: asia-south1-a
+  ZONE_NAME: asia-south1
 
 jobs:
 
@@ -39,12 +39,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker Image
+      - name: Build and Push Image using Jib
         working-directory: ./${{ matrix.service }}
         run: |
-          mvn clean package -DskipTests
-          docker build -t abhay721/${{ matrix.service }} .
-          docker push abhay721/${{ matrix.service }}
+          mvn clean compile jib:build \
+          -Dimage=abhay721/${{ matrix.service }}
 
   deploy:
     needs: docker
@@ -54,19 +53,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Kubectl - Google Cloud GKE Cluster
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Setup GKE Credentials
         uses: google-github-actions/get-gke-credentials@v2
-        env:
-          PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-          APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-          CLUSTER_NAME: ecommrce-demo
-          ZONE_NAME: asia-south1-a
         with:
           project_id: ${{ env.PROJECT_ID }}
           cluster_name: ${{ env.CLUSTER_NAME }}
           location: ${{ env.ZONE_NAME }}
 
-      - name: Deploy to Kubernetes
+      - name: Deploy to GKE
         run: |
           kubectl apply -f k8s/
           kubectl get pods
