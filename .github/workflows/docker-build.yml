@@ -1,11 +1,17 @@
-name: Build and Push Docker Images
+name: Build Push and Deploy
 
 on:
   push:
     branches:
       - main
 
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  CLUSTER_NAME: ecommrce-demo
+  ZONE_NAME: asia-south1-a
+
 jobs:
+
   docker:
     runs-on: ubuntu-latest
 
@@ -18,10 +24,10 @@ jobs:
           - discovery-service
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Setup JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
@@ -33,15 +39,34 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build JAR
+      - name: Build and Push Docker Image
+        working-directory: ./${{ matrix.service }}
         run: |
-          cd ${{ matrix.service }}
           mvn clean package -DskipTests
-
-      - name: Build Docker Image
-        run: |
-          docker build -t abhay721/${{ matrix.service }} ./${{ matrix.service }}
-
-      - name: Push Docker Image
-        run: |
+          docker build -t abhay721/${{ matrix.service }} .
           docker push abhay721/${{ matrix.service }}
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Kubectl - Google Cloud GKE Cluster
+        uses: google-github-actions/get-gke-credentials@v2
+        env:
+          PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          CLUSTER_NAME: ecommrce-demo
+          ZONE_NAME: asia-south1-a
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          cluster_name: ${{ env.CLUSTER_NAME }}
+          location: ${{ env.ZONE_NAME }}
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/
+          kubectl get pods
