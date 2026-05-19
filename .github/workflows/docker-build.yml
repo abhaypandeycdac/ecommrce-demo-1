@@ -21,7 +21,7 @@ jobs:
           - api-gateway
           - inventory-service
           - order-service
-          - config-service
+          - config-server
 
     steps:
       - name: Checkout Code
