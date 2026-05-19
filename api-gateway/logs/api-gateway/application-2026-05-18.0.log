@@ -1,0 +1,16 @@
+18-05-2026 00:02:24.327 [AsyncResolver-bootstrap-executor-%d] [-] INFO  api-gateway-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+18-05-2026 00:07:24.801 [AsyncResolver-bootstrap-executor-%d] [-] INFO  api-gateway-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+18-05-2026 00:12:24.879 [AsyncResolver-bootstrap-executor-%d] [-] INFO  api-gateway-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+18-05-2026 00:17:24.989 [AsyncResolver-bootstrap-executor-%d] [-] INFO  api-gateway-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+18-05-2026 00:22:25.091 [AsyncResolver-bootstrap-executor-%d] [-] INFO  api-gateway-c.n.d.s.r.aws.ConfigClusterResolver.getClusterEndpoints - Resolving eureka endpoints via configuration
+18-05-2026 00:26:00.876 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin.shutdown - Application shutdown requested.
+18-05-2026 00:26:01.086 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-o.s.c.n.e.s.EurekaServiceRegistry.deregister - Unregistering application API-GATEWAY with eureka with status DOWN
+18-05-2026 00:26:01.090 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.notify - Saw local status change event StatusChangeEvent [timestamp=1779044161090, current=DOWN, previous=UP]
+18-05-2026 00:26:01.097 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_API-GATEWAY/192.168.1.2:api-gateway:8080: registering service...
+18-05-2026 00:26:01.345 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-o.s.b.w.e.netty.GracefulShutdown.shutDownGracefully - Commencing graceful shutdown. Waiting for active requests to complete
+18-05-2026 00:26:01.351 [DiscoveryClient-InstanceInfoReplicator-%d] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.register - DiscoveryClient_API-GATEWAY/192.168.1.2:api-gateway:8080 - registration status: 204
+18-05-2026 00:26:01.438 [netty-shutdown] [-] INFO  api-gateway-o.s.b.w.e.netty.GracefulShutdown.doShutdown - Graceful shutdown complete
+18-05-2026 00:26:04.658 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.shutdown - Shutting down DiscoveryClient ...
+18-05-2026 00:26:07.696 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.unregister - Unregistering ...
+18-05-2026 00:26:07.754 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.unregister - DiscoveryClient_API-GATEWAY/192.168.1.2:api-gateway:8080 - deregister  status: 200
+18-05-2026 00:26:07.757 [RMI TCP Connection(60)-127.0.0.1] [-] INFO  api-gateway-c.netflix.discovery.DiscoveryClient.shutdown - Completed shut down of DiscoveryClient
